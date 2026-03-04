@@ -8,12 +8,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AgendaBundleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('field_name')
+            ->add('username')
+            ->add('password')
+            ->add('email');
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
