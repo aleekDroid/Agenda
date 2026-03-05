@@ -4,31 +4,43 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Agenda;
-use App\Form\AgendaType;
+use App\Entity\Agenda\Contact;
+use App\Form\AgendaBundlerType;
 
 final class ContactController extends AbstractController
 {
+    /**
+     * @Route("/contact", name="contact_index")
+  
+     *public function index(): Response
+     *{
+     *    return $this->render('contact/index.html.twig', [
+     
+     *'controller_name' => 'ContactController',
+     *   ]);
+     *}
+     */
 
-    #[Route('/contact', name: 'contact_new')]
-    public function index(Request $request): Response
+    public function new(Request $request)
     {
-        $agenda = new Agenda();
-        $form = $this->createForm(AgendaType::class, $agenda);
-        $form->handleRequest($request); 
+        $contact = new Contact();
+        $form = $this->createForm(AgendaBundlerType::class, $contact, array(
+            'action' => $this->generateUrl('contact_new'),
+            'method' => 'POST'
+        ));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($agenda);
-            $this->em->flush(); 
-            return $this->redirectToRoute('index');
-        }
-
-        return $this->render('contact/index.html.twig', [
-            'form' => $form->createView() ,
+        return $this->render('contact\new.html.twig', [
+            'form' => $form->createView(),
+            'controller_name' => 'ContactController',
         ]);
     }
 
-}   
+    private $doctrine;
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+}

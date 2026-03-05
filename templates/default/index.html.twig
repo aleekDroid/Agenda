@@ -4,6 +4,11 @@
 	Home2
 {% endblock %}
 
+{% block navbar %}
+	<li>
+		<a href="{{path('contact_new')}}">New Contact</a>
+	</li>
+{% endblock %}
 
 {% block body %}
 	<div class="jumbotron mb-0" style="background-color: #5b7691; text-align: left;">
@@ -18,10 +23,8 @@
 				<p class="card-text">App para gestionar contactos de manera eficiente.</p>
 			</div>
 			<div class="card">
-				<div class="card-body">
-					{{ form(form) }}
-				</div>
+				<div class="card-body"></div>
 			</div>
 		</div>
-        
-{% endblock %}
+
+	{% endblock %}
