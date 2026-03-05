@@ -1,27 +1,26 @@
 <?php
 
-namespace AgendaBundle\Form;
+namespace App\Form;
 
+use App\Entity\Agenda\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AgendaBundleType extends AbstractType
+class AgendaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('email');
-        ;
+            ->add('name')
+            ->add('lastName')
+            ->add('mail');
     }
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Contact::class,
         ]);
     }
 }
