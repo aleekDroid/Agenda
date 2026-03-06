@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new phone
+{% endblock %}
+
+{% block body %}
+
+{% block navbar %}
+	<li>
+		<a class="btn btn-default" href="{{path('index')}}" role="button">Back to home</a>
+	</li>
+{% endblock %}
+	<div class="container" style="margin-top: 20px; align-items: center; justify-content: center; display: flex;">
+		<div class="card" style="width: 75%;">
+			<h1 class="card-header ">
+				New Phone
+			</h1>
+			<div class="card-body; text-align: left;">
+				{{ form(form) }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}

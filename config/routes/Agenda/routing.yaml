@@ -2,3 +2,7 @@ agenda_contact:
   resource: 'routing/contact.yaml'
   prefix: /contact
 
+agenda_phone:
+  resource: 'routing/phone.yaml'
+  prefix: /phone
+

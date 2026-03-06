@@ -1,0 +1,15 @@
+phone_new:
+  path: /newPhone
+  defaults: {_controller: App\Controller\PhoneController::newPhone}
+
+phone_show:
+  path: /showPhones
+  defaults: {_controller: App\Controller\PhoneController::showPhones}
+
+phone_edit:
+  path: /editPhone/{id}
+  defaults: {_controller: App\Controller\PhoneController::editPhone, id: ""}
+
+phone_delete:
+  path: /deletePhone/{id}
+  defaults: {_controller: App\Controller\PhoneController::deletePhone, id: ""}

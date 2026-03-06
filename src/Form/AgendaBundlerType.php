@@ -20,7 +20,7 @@ class AgendaBundlerType extends AbstractType
                 'label' => 'Nombre',
                 'attr' => [
                     'class' => 'form-control', 
-                    'placeholder' => 'Ingrese el nombre',
+                    'placeholder' => 'Ingrese el nombre.',
                     'mb-3' => 'mb-3'
                 ]
             ])
@@ -29,7 +29,7 @@ class AgendaBundlerType extends AbstractType
                 'label' => 'Apellido',
                 'attr' => [
                     'class' => 'form-control', 
-                    'placeholder' => 'Ingrese el apellido',
+                    'placeholder' => 'Ingrese el apellido.',
                     'mb-3' => 'mb-3'
                 ]
             ])
@@ -38,7 +38,7 @@ class AgendaBundlerType extends AbstractType
                 'label' => 'Correo Electrónico',
                 'attr' => [
                     'class' => 'form-control', 
-                    'placeholder' => 'Ingrese el correo electrónico',
+                    'placeholder' => 'Ingrese el correo electrónico.',
                     'mb-3' => 'mb-3'
                 ]
             ])

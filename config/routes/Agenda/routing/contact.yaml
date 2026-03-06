@@ -1,3 +1,15 @@
 contact_new:
   path: /new
   defaults: {_controller: App\Controller\ContactController::new}
+
+contact_show:
+  path: /show
+  defaults: {_controller: App\Controller\ContactController::show}
+
+contact_edit:
+  path: /edit/{id}
+  defaults: {_controller: App\Controller\ContactController::edit, id: ""}
+
+contact_delete:
+  path: /delete/{id}
+  defaults: {_controller: App\Controller\ContactController::delete, id: ""}
