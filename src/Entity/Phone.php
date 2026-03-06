@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Agenda\Contact;
 use App\Repository\PhoneRepository;
 use BcMath\Number;
 use Doctrine\DBAL\Types\Types;
@@ -20,6 +21,9 @@ class Phone
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'phones', cascade: ['persist'])]
+    private ?Contact $contact = null;
 
     public function getId(): ?int
     {
@@ -46,6 +50,18 @@ class Phone
     public function setType(?string $Type): static
     {
         $this->Type = $Type;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): static
+    {
+        $this->contact = $contact;
 
         return $this;
     }

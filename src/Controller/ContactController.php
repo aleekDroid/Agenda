@@ -51,7 +51,7 @@ final class ContactController extends AbstractController
             $manager->flush(); // Procesar actualización o inserciones de datos.
 
             //Retornar a la ruta principal si es correcto todo.
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('contact_show');
         }
         return $this->render('contact\new.html.twig', [
             'form' => $form->createView(),

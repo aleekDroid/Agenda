@@ -1,24 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Hello ContactController!
+{% endblock %}
 
 {% block body %}
 
-{% block navbar %}
-	<li>
-		<a class="btn btn-default" href="{{path('index')}}" role="button">Back to home</a>
-	</li>
-{% endblock %}
-<div class="container" style="margin-top: 20px; align-items: center; justify-content: center; display: flex;">
-    <div class="card" style="width: 75%;">
-        <h1 class="card-header ">
-            New Contact
-        </h1>
+	{% block navbar %}
+		<li>
+			<a class="btn btn-default" href="{{path('index')}}" role="button">Back to home</a>
+		</li>
+	{% endblock %}
+	<div class="container" style="margin-top: 20px; align-items: center; justify-content: center; display: flex;">
+		<div class="card" style="width: 75%;">
+			<h1 class="card-header ">
+				New Contact
+			</h1>
 
-        <div class="card">
-            <div class="card-body; text-align: left;">
-                {{ form(form) }}
-            </div>
-        </div>
-    </div>
-{% endblock %}
+			<div class="card">
+				<div class="card-body; text-align: left;">
+					{{ form_start(form) }}
+
+					<ul class="phones" data-index="{{ form.phones|length > 0 ? form.phones|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.phones.vars.prototype)|e('html_attr') }}">
+						{% for PhonesType in form.phones %}
+							<li>{{ form_row(PhonesType) }}</li>
+						{% endfor %}
+					</ul>
+
+					<button type="button" class="btn btn-info" data-collection-holder-class="phones">
+						Add a phone number
+					</button>
+
+					<script>
+						document.querySelectorAll('.btn-info').forEach(btn => {
+                            btn.addEventListener("click", addFormToCollection)
+                        });
+
+                        function addFormToCollection(e) {
+                            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                            const item = document.createElement('li');
+
+                            item.innerHTML = collectionHolder.dataset.prototype.replace(/__name__/g, collectionHolder.dataset.index);
+
+                            collectionHolder.appendChild(item);
+
+                            collectionHolder.dataset.index ++;
+                            addTagFormDeleteLink(item);
+                        };
+					</script>
+
+					{{ form_end(form) }}
+
+				</div>
+			</div>
+		</div>
+	{% endblock %}

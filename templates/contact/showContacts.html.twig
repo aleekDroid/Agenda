@@ -23,6 +23,7 @@
 							<th scope="col">Name</th>
 							<th scope="col">Last Name</th>
 							<th scope="col">Mail</th>
+							<th scope="col">Phones</th>
 							<th scope="col">Actions</th>
 						</tr>
 					</thead>
@@ -32,6 +33,11 @@
 								<td>{{ contact.name }}</td>
 								<td>{{ contact.lastName }}</td>
 								<td>{{ contact.mail }}</td>
+								<td>
+									{% for phone in contact.phones %}
+										{{ phone.number }} <br>
+									{% endfor %}
+								</td>
 								<td class="d-grid gap-5 d-md-block text-center">
 									<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">Edit</a>
 									<a href="{{ path('contact_delete', {'id': contact.id}) }}" class="btn btn-danger">Delete</a>
