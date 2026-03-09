@@ -25,6 +25,30 @@ final class ContactController extends AbstractController
         ]);
     }
 
+    public function getContactByUserAction() {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+		//Llamada de doctrine
+        $manager= $this->doctrine->getManager();
+		//Objeto Contacto 
+        $contactRepository = $manager->getRepository(Contact::class);
+        //Query de contacto
+		// ->where, cláusula where de sql
+		// ->setParameter, usada para pasar el parámetro con el que se va a consultar
+		// ->getQuery para Obtener el query
+		// ->getResult para obtener el resultado del query 
+        $contactQuery = $contactRepository->createQueryBuilder('c')
+                ->select('c')
+                ->where('c.user = :user')
+                ->setParameter('user', $this->getUser())
+                ->getQuery()->getResult();
+        
+        return $this->render('contact/showContacts.html.twig', array(
+            'Contacts' => $contactQuery
+        ));
+        
+    }
+
     private $doctrine;
 
     public function __construct(ManagerRegistry $doctrine)
@@ -97,30 +121,6 @@ final class ContactController extends AbstractController
             $manager->flush();
         }
         return $this->redirectToRoute('contact_show');
-    }
-
-    public function getContactByUserAction() {
-
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-		//Llamada de doctrine
-        $manager= $this->doctrine->getManager();
-		//Objeto Contacto 
-        $contactRepository = $manager->getRepository(Contact::class);
-        //Query de contacto
-		// ->where, cláusula where de sql
-		// ->setParameter, usada para pasar el parámetro con el que se va a consultar
-		// ->getQuery para Obtener el query
-		// ->getResult para obtener el resultado del query 
-        $contactQuery = $contactRepository->createQueryBuilder('c')
-                ->select('c')
-                ->where('c.user = :user')
-                ->setParameter('user', $this->getUser())
-                ->getQuery()->getResult();
-        
-        return $this->render('default\index.html.twig', array(
-            'Contacts' => $contactQuery
-        ));
-        
     }
 
 }

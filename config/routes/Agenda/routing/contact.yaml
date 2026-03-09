@@ -13,3 +13,7 @@ contact_edit:
 contact_delete:
   path: /delete/{id}
   defaults: {_controller: App\Controller\ContactController::delete, id: ""}
+
+get_contact_by_user:
+  path: /getContactByUser/{id}
+  defaults: {_controller: App\Controller\ContactController::getContactByUser, id: ""}

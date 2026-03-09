@@ -7,3 +7,5 @@ all_contacts: Todos los contactos
 all_phones: Todos los teléfonos
 logout: Cerrar sesión
 home: Inicio
+
+back_to_home: Volver al inicio

@@ -33,6 +33,14 @@ class PhonesType extends AbstractType
                     'mb-3' => 'mb-3'
                 ]
             ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Add Phone',
+                'attr' => [
+                    'class' => 'btn btn-success',
+                    'mb-3' => 'mb-3',
+                    'style' => 'margin-top: 15px;'
+                ]
+            ])
         ;
     }
 
