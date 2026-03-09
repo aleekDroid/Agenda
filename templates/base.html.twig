@@ -11,42 +11,55 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	</head>
 	<body>
-        {% block header %}
-<nav class="navbar navbar-default" style="margin-bottom: 0; background-color: #5c6e58; border: none; padding: 15px; color: #f5f7f8;">
-  <div class="container-fluid"> 
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ path('index') }}" style="color: #f5f7f8; font-weight: bold; font-size: 23px;">Mi Agenda - Alexis Vilchis</a>
-    </div>
+		{% block header %}
+			<nav class="navbar navbar-default" style="margin-bottom: 0; background-color: #5c6e58; border: none; padding: 15px; color: #f5f7f8;">
+				<div
+					class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="{{ path('index') }}" style="color: #f5f7f8; font-weight: bold; font-size: 23px;">Mi Agenda - Alexis Vilchis</a>
+					</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" 
-          style="color: #f5f7f8;  font-weight: bold; font-size: 18px; border-radius: 10px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#4a5c43';" onmouseout="this.style.backgroundColor='transparent';" >
-          Usuario 
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu" style="background-color: #b4bdb2; color: #f5f7f8; border: none; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);">
-            <li><a href="{{ path('index') }}">Home</a></li>
-            <li><a href="{{ path('contact_new') }}">New Contact</a></li>
-            <li><a href="{{ path('phone_new') }}">New Phone</a></li>
-            <li><a href="{{ path('contact_show') }}">All Contacts</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="{{ path('app_logout') }}">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-        {% endblock %}
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #f5f7f8;  font-weight: bold; font-size: 18px; border-radius: 10px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#4a5c43';" onmouseout="this.style.backgroundColor='transparent';">
+									{{ app.user ? app.user.userIdentifier : 'Account' }}
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" style="background-color: #b4bdb2; color: #f5f7f8; border: none; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);">
+									<li>
+										<a href="{{ path('index') }}">{{ 'home'|trans({}, 'Agenda') }}</a>
+									</li>
+									<li>
+										<a href="{{ path('contact_new') }}">{{ 'new_contact'|trans({}, 'Agenda') }}</a>
+									</li>
+									<li>
+										<a href="{{ path('phone_new') }}">{{ 'new_phone'|trans({}, 'Agenda') }}</a>
+									</li>
+									<li>
+										<a href="{{ path('contact_show') }}">{{ 'all_contacts'|trans({}, 'Agenda') }}</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="{{ path('app_logout') }}">{{ 'logout'|trans({}, 'Agenda') }}</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		{% endblock %}
 		{% block body %}
 			{% if app.user %}
 				<li>
