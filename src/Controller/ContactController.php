@@ -15,10 +15,12 @@ final class ContactController extends AbstractController
 
     public function show()
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         //Manager de Doctine (Base de datos).
         $manager = $this->doctrine->getManager();
         //Consulta y objeto sobre contacto  
-        $contacts = $manager->getRepository(Contact::class)->findAll();
+        $contacts = $manager->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        
         //renderizar Vista
         return $this->render('contact/showContacts.html.twig', [
             'contacts' => $contacts,
