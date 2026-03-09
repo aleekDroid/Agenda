@@ -19,11 +19,17 @@ final class ContactController extends AbstractController
         //Manager de Doctine (Base de datos).
         $manager = $this->doctrine->getManager();
         //Consulta y objeto sobre contacto  
-        $contacts = $manager->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        $contacts = $manager->getRepository(Contact::class);
+
+        $contactQuery = $contacts->createQueryBuilder('c')
+                ->select('c')
+                ->where('c.user = :user')
+                ->setParameter('user', $this->getUser())
+                ->getQuery()->getResult();
         
         //renderizar Vista
         return $this->render('contact/showContacts.html.twig', [
-            'contacts' => $contacts,
+            'contacts' => $contactQuery,
         ]);
     }
 
