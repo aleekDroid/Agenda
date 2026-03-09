@@ -5,3 +5,15 @@ index:
 agenda_routes:
     resource: 'routes/Agenda/routing.yaml'
     prefix: /agenda
+
+app_register:
+    path: /register
+    defaults: {_controller: App\Controller\RegistrationController::register}
+
+app_login:
+    path: /login
+    defaults: {_controller: App\Controller\Security\SecurityController::login}
+
+app_logout:
+    path: /logout
+    defaults: {_controller: App\Controller\Security\SecurityController::logout}

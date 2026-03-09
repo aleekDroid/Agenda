@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="jumbotron mb-0" style="background-color: rgb(31, 66, 143); text-align: left;">
-		<h1 class="ml-3" style="color: #b5c0ca; margin-left: 20px;">Mi agenda - Alexis Vilchis</h1>
-	</div>
+
 	<div class="container" style="margin-top: 20px; align-items: center; justify-content: center; display: flex;">
 		<div class="card" style="width: 75%;">
 			<h2 class="card-header">
@@ -20,13 +18,13 @@
 				<div class="card-body" styles="text-align: center; justify-content: center; display: flex;">
 					{% block navbar %}
 						<div class="d-grid gap-6 d-md-block text-center">
-							<a class="btn btn-default mb-2" href="{{path('contact_new')}}" role="button">New Contact</a>
-							<a class="btn btn-default mb-2" href="{{path('phone_new')}}" role="button">New Phone</a>
+							<a class="btn btn-default mb-2" href="{{path('contact_new')}}" role="button" style="border: 1px solid #f2d349;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#cec6a1'" onmouseout="this.style.borderColor='#f2d349'; this.style.backgroundColor='transparent'">New Contact</a>
+							<a class="btn btn-default mb-2" href="{{path('phone_new')}}" role="button" style="border: 1px solid #f2d349;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#cec6a1'" onmouseout="this.style.borderColor='#f2d349'; this.style.backgroundColor='transparent	'">New Phone</a>
 						</div>
 						<br>
 						<div class="d-grid gap-2 d-md-block text-center">
-							<a class="btn btn-default mb-2" href="{{path('contact_show')}}" role="button">All Contacts</a>
-							<a class="btn btn-default mb-2" href="{{path('phone_show')}}" role="button">All Phones</a>
+							<a class="btn btn-default mb-2" href="{{path('contact_show')}}" role="button" style="border: 1px solid #8aa899;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#8aa899'" onmouseout="this.style.borderColor='#8aa899'; this.style.backgroundColor='transparent'">All Contacts</a>
+							<a class="btn btn-default mb-2" href="{{path('phone_show')}}" role="button" style="border: 1px solid #8aa899;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#8aa899'" onmouseout="this.style.borderColor='#8aa899'; this.style.backgroundColor='transparent'">All Phones</a>
 						</div>
 					{% endblock %}
 				</div>

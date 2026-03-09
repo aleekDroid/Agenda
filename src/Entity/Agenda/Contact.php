@@ -3,6 +3,7 @@
 namespace App\Entity\Agenda;
 
 use App\Entity\Phone;
+use App\Entity\User\User;
 use App\Repository\Agenda\ContactRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,6 +31,9 @@ class Contact
      */
     #[ORM\OneToMany(targetEntity: Phone::class, mappedBy: 'contact', cascade: ['persist'], orphanRemoval: true)]
     private Collection $phones;
+
+    #[ORM\ManyToOne(inversedBy: 'contacts')]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -103,6 +107,18 @@ class Contact
                 $phone->setContact(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

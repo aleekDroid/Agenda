@@ -14,7 +14,67 @@
 				Edit Contact
 			</h1>
 			<div class="card-body; text-align: left; mt-4;">
-				{{ form(form) }}
-				</div>
+				{{ form_start(form) }}
+					{{ form_row(form.name) }}
+					{{ form_row(form.lastName) }}
+					{{ form_row(form.mail) }}
+					<ul class="phones"
+                    data-index="{{ form.phones|length > 0 ? form.phones|last.vars.name + 2 : 1 }}"
+                    data-prototype="{{ form_widget(form.phones.vars.prototype)|e('html_attr') }}"
+                        >
+                        {% for phone in form.phones %}
+                            <li>{{ form_row(phone) }}</li>
+                        {% endfor %}
+                    </ul>
+					<button type="button" class="btn btn-info" data-collection-holder-class="phones">
+                            Add a phone number
+                        </button>
+
+                        <script>
+                            document.querySelectorAll('.btn-info').forEach(btn => {
+                                btn.addEventListener("click", addFormToCollection)
+                            });
+
+							document.querySelectorAll('ul.phones li').forEach((tag) => {
+								addTagFormDeleteLink(tag)
+							})
+
+                            function addFormToCollection(e) {
+                                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                                const item = document.createElement('li');
+
+                                item.innerHTML = collectionHolder.
+                                    dataset.
+                                    prototype.
+                                    replace(
+                                        /__name__/g, 
+                                        collectionHolder.dataset.index
+                                    );
+
+                                collectionHolder.appendChild(item);
+
+                                collectionHolder.dataset.index ++;
+                                addTagFormDeleteLink(item);
+                            };
+
+                            function addTagFormDeleteLink(item) {
+                                const removeFormButton = document.createElement('button');
+                                removeFormButton.innerText = 'Delete this phone number';
+                                removeFormButton.classList.add('btn', 'btn-danger');
+                                removeFormButton.style.marginTop = '10px';
+
+                                item.append(removeFormButton);
+
+                                removeFormButton.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                // remove the li for the tag form
+                                item.remove();
+                                });
+                            }
+                        </script>
+				{{ form_end(form) }}
 			</div>
+		</div>
+	</div>
 {% endblock %}

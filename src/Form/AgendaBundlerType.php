@@ -45,9 +45,11 @@ class AgendaBundlerType extends AbstractType
                 ]
             ])
             ->add('phones', CollectionType::class, [
+                'label' => '',
                 'entry_type' => PhonesType::class,
                 'allow_add' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'allow_delete' => true,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Add Contact',
