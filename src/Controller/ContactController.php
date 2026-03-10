@@ -3,18 +3,28 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Agenda\Contact;
 use App\Form\AgendaBundlerType;
+use App\Entity\Agenda\Phone;
 
 final class ContactController extends AbstractController
 {
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine, RequestStack $requestStack)
+    {
+        $this->doctrine = $doctrine;
+        $this->requestStack = $requestStack;
+        $session = $this->requestStack->getSession();
+
+    }
 
     public function show()
     {
+        $session = $this->requestStack->getSession();
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         //Manager de Doctine (Base de datos).
         $manager = $this->doctrine->getManager();
@@ -22,46 +32,39 @@ final class ContactController extends AbstractController
         $contacts = $manager->getRepository(Contact::class);
 
         $contactQuery = $contacts->createQueryBuilder('c')
-                ->select('c')
-                ->where('c.user = :user')
-                ->setParameter('user', $this->getUser())
-                ->getQuery()->getResult();
-        
+            ->select('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $this->getUser())
+            ->getQuery()->getResult();
+
         //renderizar Vista
         return $this->render('contact/showContacts.html.twig', [
             'contacts' => $contactQuery,
         ]);
     }
 
-    public function getContactByUserAction() {
+    public function getContactByUserAction()
+    {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-		//Llamada de doctrine
-        $manager= $this->doctrine->getManager();
-		//Objeto Contacto 
+        //Llamada de doctrine
+        $manager = $this->doctrine->getManager();
+        //Objeto Contacto 
         $contactRepository = $manager->getRepository(Contact::class);
         //Query de contacto
-		// ->where, cláusula where de sql
-		// ->setParameter, usada para pasar el parámetro con el que se va a consultar
-		// ->getQuery para Obtener el query
-		// ->getResult para obtener el resultado del query 
+        // ->where, cláusula where de sql
+        // ->setParameter, usada para pasar el parámetro con el que se va a consultar
+        // ->getQuery para Obtener el query
+        // ->getResult para obtener el resultado del query 
         $contactQuery = $contactRepository->createQueryBuilder('c')
-                ->select('c')
-                ->where('c.user = :user')
-                ->setParameter('user', $this->getUser())
-                ->getQuery()->getResult();
-        
+            ->select('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $this->getUser())
+            ->getQuery()->getResult();
+
         return $this->render('contact/showContacts.html.twig', array(
             'Contacts' => $contactQuery
         ));
-        
-    }
-
-    private $doctrine;
-
-    public function __construct(ManagerRegistry $doctrine)
-    {
-        $this->doctrine = $doctrine;
     }
 
     public function new(Request $request)
@@ -77,7 +80,7 @@ final class ContactController extends AbstractController
 
         $contactRepository->setUser($this->getUser());
 
-    
+
         $form->handleRequest($request);
 
         //Si el form es válido y se subió correctamente...
@@ -93,29 +96,28 @@ final class ContactController extends AbstractController
             'form' => $form->createView(),
             'controller_name' => 'ContactController',
         ]);
-    }   
+    }
 
     public function edit(Request $request)
     {
-		//Nuevo parámetro $idContact.
-		$manager = $this->doctrine->getManager();
+        //Nuevo parámetro $idContact.
+        $manager = $this->doctrine->getManager();
 
-		//Consulta de CONTACTO Buscando por Id.
+        //Consulta de CONTACTO Buscando por Id.
         $contact = $manager->getRepository(Contact::class)->find($request->get('id'));
 
-		//Creación de Formulario para Editar (es el mismo Formulario de Creación).
-		//Pasar el Objeto $contactoRepository que contiene la info  del contacto a editar. 
-        $form = $this->createForm(AgendaBundlerType::class, $contact, array(
-        ));
+        //Creación de Formulario para Editar (es el mismo Formulario de Creación).
+        //Pasar el Objeto $contactoRepository que contiene la info  del contacto a editar. 
+        $form = $this->createForm(AgendaBundlerType::class, $contact, array());
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             //Agregar el Entitymanager y enviar los datos a insertar. 
             $manager->persist($contact);
             $manager->flush();
             //Redirigir a la vista que quieras en caso que sea exitoso
             return $this->redirectToRoute('contact_show');
         }
-        return $this->render('contact\editContact.html.twig',[
+        return $this->render('contact\editContact.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -127,8 +129,13 @@ final class ContactController extends AbstractController
         if ($contact) {
             $manager->remove($contact);
             $manager->flush();
+            
+/*             $phone = $manager->getRepository(Phone::class)->find($request->get('id'));
+             if ($phone) {
+                $manager->remove($phone);
+                $manager->flush();
+            } */
         }
         return $this->redirectToRoute('contact_show');
     }
-
 }
