@@ -27,7 +27,7 @@
                         {% endfor %}
                     </ul>
 					<button type="button" class="btn btn-info" data-collection-holder-class="phones">
-                            Add a phone number
+                            {{'add_phone'|trans({}, 'Agenda') }}
                         </button>
 
                         <script>
@@ -60,7 +60,7 @@
 
                             function addTagFormDeleteLink(item) {
                                 const removeFormButton = document.createElement('button');
-                                removeFormButton.innerText = 'Delete this phone number';
+                                removeFormButton.innerText = "{{'delete_phone'|trans({}, 'Agenda') }}";
                                 removeFormButton.classList.add('btn', 'btn-danger');
                                 removeFormButton.style.marginTop = '10px';
 

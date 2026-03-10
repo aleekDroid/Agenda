@@ -21,9 +21,9 @@
 				<table class="table table-hover">
 					<thead class="text-white" style="background-color: #f2d349; border-radius: 5px;">
 						<tr>
-							<th scope="col">Number</th>
-							<th scope="col">Type</th>
-							<th scope="col">Actions</th>
+							<th scope="col">{{'phone_number'|trans({}, 'Agenda') }}</th>
+							<th scope="col">{{'phone_type'|trans({}, 'Agenda') }}</th>
+							<th scope="col">{{'actions'|trans({}, 'Agenda') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -32,8 +32,8 @@
 								<td>{{ phone.number }}</td>
 								<td>{{ phone.type }}</td>
 								<td class="d-grid gap-5 d-md-block text-center">
-									<a href="{{ path('phone_edit', {'id': phone.id}) }}" class="btn btn-primary">Edit</a>
-									<a href="{{ path('phone_delete', {'id': phone.id}) }}" class="btn btn-danger">Delete</a>
+									<a href="{{ path('phone_edit', {'id': phone.id}) }}" class="btn btn-primary">{{'edit'|trans({}, 'Agenda') }}</a>
+									<a href="{{ path('phone_delete', {'id': phone.id}) }}" class="btn btn-danger">{{'delete'|trans({}, 'Agenda') }}</a>
 							</tr>
 						{% endfor %}
 					</tbody>

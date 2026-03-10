@@ -1,0 +1,37 @@
+#Home:
+title:                            My Agenda, Alexis. ;)
+new_contact:                      New Contact
+edit_contact:                     Edit Contact
+new_phone:                        New Phone
+edit_phone:                       Edit Phone
+all_contacts:                     All Contacts
+all_phones:                       All Phones
+logout:                           Logout
+home:                             Home
+contacts:                         Contacts
+subtitle:                         App to efficiently manage contacts.
+
+#New contact:
+name:                             Name
+enter_name:                       Enter the name
+last_name:                        Last Name
+enter_last_name:                  Enter the last name
+email:                            Email
+enter_email:                      Enter the email
+add_phone:                        Add Phone
+enter_phone:                      Enter the phone number
+phone_number:                     Phone Number
+phone_type:                       Phone Type
+enter_phone_type:                 Enter the phone type
+phones:                           Phones
+save:                             Save
+actions:                          Actions
+delete_phone:                    Delete Phone
+constraints_phone_number:              The phone number must be exactly 10 digits.
+
+back_to_home:                     Back to Home
+language:                         Language
+english:                          English
+spanish:                          Spanish
+edit:                            Edit
+delete:                          Delete

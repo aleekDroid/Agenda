@@ -1,11 +1,37 @@
-title: Mi Agenda, Alexis. ;)
-new_contact: Nuevo contacto
-edit_contact: Editar contacto
-new_phone: Nuevo teléfono
-edit_phone: Editar teléfono
-all_contacts: Todos los contactos
-all_phones: Todos los teléfonos
-logout: Cerrar sesión
-home: Inicio
+#Home.
+title:                            Mi Agenda, Alexis. ;)
+new_contact:                      Nuevo contacto
+edit_contact:                     Editar contacto
+new_phone:                        Nuevo teléfono
+edit_phone:                       Editar teléfono
+all_contacts:                     Todos los contactos
+all_phones:                       Todos los teléfonos
+logout:                           Cerrar sesión
+home:                             Inicio
+contacts:                          Contactos
+subtitle:                         App para gestionar contactos de manera eficiente.
 
-back_to_home: Volver al inicio
+#Nuevo contacto:
+name:                             Nombre
+enter_name:                       Ingrese el nombre
+last_name:                        Apellido
+enter_last_name:                  Ingrese el apellido
+email:                            Correo electrónico
+enter_email:                      Ingrese el correo electrónico
+add_phone:                        Agregar teléfono
+enter_phone:                      Ingrese el número de teléfono
+phone_number:                    Número de teléfono
+phone_type:                      Tipo de teléfono
+enter_phone_type:                Ingrese el tipo de teléfono
+phones:                            Teléfonos
+save:                             Guardar
+actions:                          Acciones
+delete_phone:                    Eliminar teléfono
+constraints_phone_number:              El número de teléfono debe tener exactamente 10 dígitos.
+
+back_to_home:                     Volver al inicio
+language:                         Idioma
+english:                          Inglés
+spanish:                          Español
+edit:                            Editar
+delete:                          Eliminar

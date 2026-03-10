@@ -17,3 +17,15 @@ app_login:
 app_logout:
     path: /logout
     defaults: {_controller: App\Controller\Security\SecurityController::logout}
+
+app_locale:
+    path: /locale
+    defaults: {_controller: App\Controller\LocaleController::index}
+
+change_language:
+  path: /change-language/{locale}
+  defaults: {_controller: App\Controller\LanguageController::changeLanguage}
+
+root_route_redirect:
+    path: /
+    defaults: {_controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction, path: /es ,route: index, permanent: true}

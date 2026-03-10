@@ -19,45 +19,45 @@ class AgendaBundlerType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
-                'label' => 'Name',
+                'label' => 'name',
                 'attr' => [
-                    'class' => 'form-control', 
-                    'placeholder' => 'Enter the name.',
-                    'mb-3' => 'mb-3'
-                ]
+                    'class' => 'form-control',
+                    'placeholder' => 'enter_name',
+                    'mb-3' => 'mb-3',
+                ],
             ])
             ->add('lastName', TextType::class, [
                 'required' => true,
-                'label' => 'Last Name',
+                'label' => 'last_name',
                 'attr' => [
-                    'class' => 'form-control', 
-                    'placeholder' => 'Enter the last name.',
-                    'mb-3' => 'mb-3'
-                ]
+                    'class' => 'form-control',
+                    'placeholder' => 'enter_last_name',
+                    'mb-3' => 'mb-3',
+                ],
             ])
             ->add('mail', EmailType::class, [
                 'required' => true,
-                'label' => 'Email',
+                'label' => 'email',
                 'attr' => [
-                    'class' => 'form-control', 
-                    'placeholder' => 'Enter the email.',
-                    'mb-3' => 'mb-3'
-                ]
+                    'class' => 'form-control',
+                    'placeholder' => 'enter_email',
+                    'mb-3' => 'mb-3',
+                ],
             ])
             ->add('phones', CollectionType::class, [
-                'label' => '',
+                'label' => 'phones',
                 'entry_type' => PhonesType::class,
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Add Contact',
+                'label' => 'save',
                 'attr' => [
                     'class' => 'btn btn-success',
                     'mb-3' => 'mb-3',
-                    'style' => 'margin-top: 15px;'
-                ]
+                    'style' => 'margin-top: 15px;',
+                ],
             ])
         ;
     }
@@ -66,6 +66,7 @@ class AgendaBundlerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class,
+            'translation_domain' => 'Agenda',
         ]);
     }
 }

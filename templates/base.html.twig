@@ -17,18 +17,22 @@
 					class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="{{ path('index') }}" style="color: #f5f7f8; font-weight: bold; font-size: 23px;">Mi Agenda - Alexis Vilchis</a>
+						<a class="navbar-brand" href="{{ path('index') }}" style="color: #f5f7f8; font-weight: bold; font-size: 23px;">{{ 'title'|trans({}, 'Agenda') }}</a>
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a id="languageDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #5c6e58; border: none; color: #f5f7f8; font-weight: bold; font-size: 18px; border-radius: 10px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#4a5c43';" onmouseout="this.style.backgroundColor='transparent';">
+									{{ 'language'|trans({}, 'Agenda') }}
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="languageDropdown" style="background-color: #b4bdb2; color: #f5f7f8; border: none; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);">
+									<li><a href="{{ path('change_language', {'locale': 'en'}) }}">{{ 'english'|trans({}, 'Agenda') }}</a></li>
+									<li><a href="{{ path('change_language', {'locale': 'es'}) }}">{{ 'spanish'|trans({}, 'Agenda') }}</a></li>
+								</ul>
+							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #f5f7f8;  font-weight: bold; font-size: 18px; border-radius: 10px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#4a5c43';" onmouseout="this.style.backgroundColor='transparent';">
 									{{ app.user ? app.user.userIdentifier : 'Account' }}
