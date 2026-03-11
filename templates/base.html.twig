@@ -65,6 +65,18 @@
 			</nav>
 		{% endblock %}
 		{% block body %}
+			{# show flash messages stored in the session #}
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert alert-{{ label }}">{{ message }}</div>
+				{% endfor %}
+			{% endfor %}
+
+			{# example of reading a custom session value added by controllers #}
+			{% if app.session is defined and app.session.has('last_visited_section') %}
+				<p class="text-muted">Last section: {{ app.session.get('last_visited_section') }}</p>
+			{% endif %}
+
 			{% if app.user %}
 				<li>
 					<a href="{{ path('app_logout') }}">Logout</a>

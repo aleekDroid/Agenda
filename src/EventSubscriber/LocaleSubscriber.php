@@ -24,14 +24,12 @@ class LocaleSubscriber implements EventSubscriberInterface
 
         $locale = $session->get('_locale');
         $request->setLocale($locale);
-        // the core LocaleListener (priority 16) will run after us and
-        // synchronize the translator to the request locale
+
     }
 
     public static function getSubscribedEvents()
     {
-        // priority > 16 so our listener executes before the default
-        // Symfony LocaleListener (which has priority 16)
+
         return [
             KernelEvents::REQUEST => [['onKernelRequest', 20]],
         ];

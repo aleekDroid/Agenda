@@ -14,6 +14,19 @@
 			<div class="card-body">
 				<p class="card-text">{{ 'subtitle'|trans({}, 'Agenda') }}</p>
 			</div>
+			{% if app.user %}
+				<p>
+					You are logged in as
+					{{ app.user.userIdentifier }},
+					<a href="{{ logout_path() }}">Logout</a>
+				</p>
+			{% else %}
+			<p>
+				<a href="{{ path('app_login') }}" style="color: #8aa899;">{{ 'login'|trans({}, 'Agenda') }}</a>
+				{{ 'or'|trans({}, 'Agenda') }}
+				<a href="{{ path('app_register') }}" style="color: #8aa899;">{{ 'register'|trans({}, 'Agenda') }}</a>
+			</p>
+			{% endif %}
 			<div class="card">
 				<div class="card-body" styles="text-align: center; justify-content: center; display: flex;">
 					{% block navbar %}
@@ -24,7 +37,6 @@
 						<br>
 						<div class="d-grid gap-2 d-md-block text-center">
 							<a class="btn btn-default mb-2" href="{{path('contact_show')}}" role="button" style="border: 1px solid #8aa899;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#8aa899'" onmouseout="this.style.borderColor='#8aa899'; this.style.backgroundColor='transparent'">{{ 'all_contacts'|trans({}, 'Agenda') }}</a>
-							<a class="btn btn-default mb-2" href="{{path('phone_show')}}" role="button" style="border: 1px solid #8aa899;  transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#8aa899'" onmouseout="this.style.borderColor='#8aa899'; this.style.backgroundColor='transparent'">{{ 'all_phones'|trans({}, 'Agenda') }}</a>
 						</div>
 					{% endblock %}
 				</div>

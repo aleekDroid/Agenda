@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Agenda\Contact;
 use App\Form\AgendaBundlerType;
 use App\Entity\Agenda\Phone;
@@ -18,17 +19,27 @@ final class ContactController extends AbstractController
     {
         $this->doctrine = $doctrine;
         $this->requestStack = $requestStack;
-        $session = $this->requestStack->getSession();
-
     }
 
-    public function show()
+
+    public function show(Request $request): Response
     {
-        $session = $this->requestStack->getSession();
+        $session = $request->getSession();
+        if ($session) {
+            $session->set('last_visited_section', 'contacts');
+        } else {
+            return $this->redirect($this->requestStack->getCurrentRequest()->headers->get('referer', $this->generateUrl('index')));
+        }
+
+        $session->remove('usuario_id');
+
+        // flash (mensaje temporal).
+        $this->addFlash('success', 'Contacto guardado correctamente');
+
+        // Denegar acceso a usuarios no autenticados.
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        //Manager de Doctine (Base de datos).
         $manager = $this->doctrine->getManager();
-        //Consulta y objeto sobre contacto  
+        //Consulta y objeto sobre contacto.  
         $contacts = $manager->getRepository(Contact::class);
 
         $contactQuery = $contacts->createQueryBuilder('c')
@@ -37,38 +48,24 @@ final class ContactController extends AbstractController
             ->setParameter('user', $this->getUser())
             ->getQuery()->getResult();
 
-        //renderizar Vista
         return $this->render('contact/showContacts.html.twig', [
             'contacts' => $contactQuery,
         ]);
     }
 
-    public function getContactByUserAction()
-    {
-
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        //Llamada de doctrine
-        $manager = $this->doctrine->getManager();
-        //Objeto Contacto 
-        $contactRepository = $manager->getRepository(Contact::class);
-        //Query de contacto
-        // ->where, cláusula where de sql
-        // ->setParameter, usada para pasar el parámetro con el que se va a consultar
-        // ->getQuery para Obtener el query
-        // ->getResult para obtener el resultado del query 
-        $contactQuery = $contactRepository->createQueryBuilder('c')
-            ->select('c')
-            ->where('c.user = :user')
-            ->setParameter('user', $this->getUser())
-            ->getQuery()->getResult();
-
-        return $this->render('contact/showContacts.html.twig', array(
-            'Contacts' => $contactQuery
-        ));
-    }
-
     public function new(Request $request)
     {
+
+        $session = $request->getSession();
+        if ($session) {
+            $session->set('last_visited_section', 'contacts');
+        } else {
+            return $this->redirect($this->requestStack->getCurrentRequest()->headers->get('referer', $this->generateUrl('index')));
+        }
+
+        $session->remove('usuario_id');
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $manager = $this->doctrine->getManager();
 
@@ -100,7 +97,17 @@ final class ContactController extends AbstractController
 
     public function edit(Request $request)
     {
-        //Nuevo parámetro $idContact.
+
+        $session = $request->getSession();
+        if ($session) {
+            $session->set('last_visited_section', 'contacts');
+        } else {
+            return $this->redirect($this->requestStack->getCurrentRequest()->headers->get('referer', $this->generateUrl('index')));
+        }
+
+        $session->remove('usuario_id');
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->doctrine->getManager();
 
         //Consulta de CONTACTO Buscando por Id.
@@ -124,13 +131,23 @@ final class ContactController extends AbstractController
 
     public function delete(Request $request)
     {
+        $session = $request->getSession();
+        if ($session) {
+            $session->set('last_visited_section', 'contacts');
+        } else {
+            return $this->redirect($this->requestStack->getCurrentRequest()->headers->get('referer', $this->generateUrl('index')));
+        }
+
+        $session->remove('usuario_id');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $manager = $this->doctrine->getManager();
         $contact = $manager->getRepository(Contact::class)->find($request->get('id'));
         if ($contact) {
             $manager->remove($contact);
             $manager->flush();
-            
-/*             $phone = $manager->getRepository(Phone::class)->find($request->get('id'));
+
+            /*             $phone = $manager->getRepository(Phone::class)->find($request->get('id'));
              if ($phone) {
                 $manager->remove($phone);
                 $manager->flush();
