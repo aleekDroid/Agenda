@@ -28,14 +28,16 @@
                             {% endfor %}
                         </ul>
 
-                        <button type="button" class="btn btn-info" data-collection-holder-class="phones">
+                        <button id="add-phone-btn" type="button" class="btn btn-info" data-collection-holder-class="phones">
                             {{'add_phone'|trans({}, 'Agenda') }}
                         </button>
 
+                        <div id="save-button" style="margin-top: 20px;">
+                        {{ form_row(form.save) }}
+                        </div>
+
                         <script>
-                            document.querySelectorAll('.btn-info').forEach(btn => {
-                                btn.addEventListener("click", addFormToCollection)
-                            });
+                            document.getElementById('add-phone-btn').addEventListener("click", addFormToCollection);
 
                             function addFormToCollection(e) {
                                 const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
@@ -70,6 +72,14 @@
                                 item.remove();
                                 });
                             }
+
+                            $('#save-button').on('click', function() {
+                                Swal.fire({
+                                    title: '{{ "contact_created" |trans({}, "Agenda") }}',
+                                    icon: 'success',
+                                    confirmButtonText: '{{ "ok" |trans({}, "Agenda") }}'
+                                });
+                            });
                         </script>
 
 					{{ form_end(form) }}

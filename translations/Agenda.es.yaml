@@ -28,6 +28,11 @@ save:                             Guardar
 actions:                          Acciones
 delete_phone:                    Eliminar teléfono
 constraints_phone_number:              El número de teléfono debe tener exactamente 10 dígitos.
+contact_created:                     Contacto creado
+delete_contact:                    Eliminar contacto
+delete_contact_confirmation:       ¿Está seguro de que desea eliminar este contacto?
+yes_delete:                          Sí, eliminar
+cancel:                              Cancelar
 
 back_to_home:                     Volver al inicio
 language:                         Idioma
@@ -36,3 +41,7 @@ spanish:                          Español
 edit:                            Editar
 delete:                          Eliminar
 or:                              O
+
+#Phone added:
+phone_added:                     Teléfono agregado
+ok:                              OK

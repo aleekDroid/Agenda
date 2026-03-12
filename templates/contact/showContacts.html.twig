@@ -40,9 +40,31 @@
 								</td>
 								<td class="d-grid gap-5 d-md-block text-center">
 									<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">{{'edit'|trans({}, 'Agenda') }}</a>
-									<a href="{{ path('contact_delete', {'id': contact.id}) }}" class="btn btn-danger">{{'delete'|trans({}, 'Agenda') }}</a>
+									<a id="delete-contact-btn" href="{{ path('contact_delete', {'id': contact.id}) }}" class="btn btn-danger">{{'delete'|trans({}, 'Agenda') }}</a>
 								</td>	
 							</tr>
+
+							<script>
+
+								$('#delete-contact-btn').on('click', function(event) {
+									event.preventDefault();
+									const url = $(this).attr('href');
+
+									Swal.fire({
+										title: '{{ "delete_contact_confirmation" |trans({}, "Agenda") }}',
+										icon: 'warning',
+										showCancelButton: true,
+										confirmButtonColor: '#d33',
+										cancelButtonColor: '#3085d6',
+										confirmButtonText: '{{ "yes_delete" |trans({}, "Agenda") }}',
+										cancelButtonText: '{{ "cancel" |trans({}, "Agenda") }}'
+									}).then((result) => {
+										if (result.isConfirmed) {
+											window.location.href = url;
+										}
+									});
+								});
+							</script>
 						{% endfor %}
 					</tbody>
 				</table>

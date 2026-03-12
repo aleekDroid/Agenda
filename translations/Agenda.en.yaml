@@ -28,6 +28,11 @@ save:                             Save
 actions:                          Actions
 delete_phone:                    Delete Phone
 constraints_phone_number:              The phone number must be exactly 10 digits.
+contact_created:                     Contact created
+delete_contact:                    Delete Contact
+delete_contact_confirmation:       Are you sure you want to delete this contact?
+yes_delete:                          Yes, delete
+cancel:                              Cancel
 
 back_to_home:                     Back to Home
 language:                         Language
@@ -36,3 +41,7 @@ spanish:                          Spanish
 edit:                            Edit
 delete:                          Delete
 or:                              Or
+
+#Phone added:
+phone_added:                     Phone added 
+ok:                              OK
