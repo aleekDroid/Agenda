@@ -41,6 +41,9 @@ spanish:                          Spanish
 edit:                            Edit
 delete:                          Delete
 or:                              Or
+edit_contact_confirmation:              Are you sure you want to edit this contact?
+yes_save:                          Yes, save
+delete_phone_confirmation:       Are you sure you want to delete this phone?
 
 #Phone added:
 phone_added:                     Phone added 

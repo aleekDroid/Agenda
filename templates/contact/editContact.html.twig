@@ -5,7 +5,7 @@
 {% block body %}
 	{% block navbar %}
     <div class="d-grid gap-6 d-md-block text-left" style="margin-top: 40px; margin-left: 40px;">
-			<a class="btn btn-default" href="{{path('contact_show')}}" role="button">{{ 'back_to_home'|trans({}, 'Agenda') }}</a>
+			<a class="btn btn-default" href="{{path('contact_show')}}" role="button"><i class="fa-solid fa-angle-left"></i></a>
         </div>
 	{% endblock %}
 	<div class="container" style="margin-top: 20px; align-items: center; justify-content: center; display: flex;">
@@ -29,6 +29,10 @@
 					<button type="button" class="btn btn-info" data-collection-holder-class="phones">
                             {{'add_phone'|trans({}, 'Agenda') }}
                         </button>
+
+                        <div id="save-button" style="margin-top: 20px;">
+                        {{ form_row(form.save) }}
+                        </div>
 
                         <script>
                             document.querySelectorAll('.btn-info').forEach(btn => {
@@ -72,6 +76,50 @@
                                 item.remove();
                                 });
                             }
+
+
+/*                             $('item').appendTagFormDeleteLink(){
+                                const removeFormButton = document.createElement('button');
+                                removeFormButton.innerText = "{{'delete_phone'|trans({}, 'Agenda') }}";
+                                removeFormButton.classList.add('btn', 'btn-danger');   
+                                removeFormButton.style.marginTop = '10px';
+
+                                item.append(removeFormButton);
+
+                                $('removeFormButton').on('click', function(e) {
+                                    e.preventDefault();
+                                    Swal.fire({
+                                        title: '{{ "delete_phone_confirmation" |trans({}, "Agenda") }}',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: '{{ "yes_delete" |trans({}, "Agenda") }}',
+                                        cancelButtonText: '{{ "cancel" |trans({}, "Agenda") }}'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            item.remove();
+                                        }    
+                                    });
+                                });
+                            } */
+
+                            $('#save-button').on('click', function(e) {
+                                e.preventDefault();
+                                Swal.fire({
+                                    title: '{{ "edit_contact_confirmation" |trans({}, "Agenda") }}',
+                                    icon: 'question',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '{{ "yes_save" |trans({}, "Agenda") }}',
+                                    cancelButtonText: '{{ "cancel" |trans({}, "Agenda") }}'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        $('#save-button').closest('form').submit();
+                                    }
+                                });     
+                            });
                         </script>
 				{{ form_end(form) }}
 			</div>

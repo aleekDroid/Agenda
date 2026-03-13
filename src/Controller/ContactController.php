@@ -39,7 +39,6 @@ final class ContactController extends AbstractController
         // Denegar acceso a usuarios no autenticados.
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->doctrine->getManager();
-        //Consulta y objeto sobre contacto.  
         $contacts = $manager->getRepository(Contact::class);
 
         $contactQuery = $contacts->createQueryBuilder('c')
@@ -86,7 +85,7 @@ final class ContactController extends AbstractController
             $manager->persist($contactRepository); //Agregar información en la memoria del Manager.
             $manager->flush(); // Procesar actualización o inserciones de datos.
 
-            //Retornar a la ruta principal si es correcto todo.
+            //Retornar a la ruta principal si es correcto.
             return $this->redirectToRoute('contact_show');
         }
         return $this->render('contact\new.html.twig', [
@@ -114,7 +113,6 @@ final class ContactController extends AbstractController
         $contact = $manager->getRepository(Contact::class)->find($request->get('id'));
 
         //Creación de Formulario para Editar (es el mismo Formulario de Creación).
-        //Pasar el Objeto $contactoRepository que contiene la info  del contacto a editar. 
         $form = $this->createForm(AgendaBundlerType::class, $contact, array());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -147,11 +145,6 @@ final class ContactController extends AbstractController
             $manager->remove($contact);
             $manager->flush();
 
-            /*             $phone = $manager->getRepository(Phone::class)->find($request->get('id'));
-             if ($phone) {
-                $manager->remove($phone);
-                $manager->flush();
-            } */
         }
         return $this->redirectToRoute('contact_show');
     }

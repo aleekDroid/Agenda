@@ -24,7 +24,7 @@ phone_number:                    Número de teléfono
 phone_type:                      Tipo de teléfono
 enter_phone_type:                Ingrese el tipo de teléfono
 phones:                            Teléfonos
-save:                             Guardar
+save:                             Guardar 
 actions:                          Acciones
 delete_phone:                    Eliminar teléfono
 constraints_phone_number:              El número de teléfono debe tener exactamente 10 dígitos.
@@ -41,6 +41,9 @@ spanish:                          Español
 edit:                            Editar
 delete:                          Eliminar
 or:                              O
+edit_contact_confirmation:              ¿Está seguro de que desea editar este contacto?
+yes_save:                          Sí, guardar
+delete_phone_confirmation:       ¿Está seguro de que desea eliminar este teléfono?
 
 #Phone added:
 phone_added:                     Teléfono agregado
