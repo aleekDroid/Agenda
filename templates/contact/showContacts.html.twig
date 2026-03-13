@@ -4,6 +4,15 @@
 {% endblock %}
 
 {% block body %}
+{% for flash_message in app.flashes('success') %}
+<script>
+Swal.fire({
+    title: '{{ flash_message }}',
+    icon: 'success',
+    confirmButtonText: 'OK'
+});
+</script>
+{% endfor %}
 {% block navbar %}
 <div class="d-grid gap-6 d-md-block text-left" style="margin-top: 40px; margin-left: 40px;">
 		<a class="btn btn-default" href="{{path('index')}}" role="button"><i class="fa-solid fa-angle-left"></i></a>
