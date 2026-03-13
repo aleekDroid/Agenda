@@ -4,15 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% for flash_message in app.flashes('success') %}
-<script>
-Swal.fire({
-    title: '{{ flash_message }}',
-    icon: 'success',
-    confirmButtonText: 'OK'
-});
-</script>
-{% endfor %}
+
 {% block navbar %}
 <div class="d-grid gap-6 d-md-block text-left" style="margin-top: 40px; margin-left: 40px;">
 		<a class="btn btn-default" href="{{path('index')}}" role="button"><i class="fa-solid fa-angle-left"></i></a>
@@ -74,9 +66,15 @@ Swal.fire({
 									}).then((result) => {
 										if (result.isConfirmed) {
 											window.location.href = url;
+											Swal.fire({
+												title: '{{ "contact_deleted" |trans({}, "Agenda") }}',
+												text: '{{ "contact_deleted_message" |trans({}, "Agenda") }}',
+												icon: 'success',
+											});
 										}
 									});
 								});
+								
 							</script>
 						{% endfor %}
 					</tbody>

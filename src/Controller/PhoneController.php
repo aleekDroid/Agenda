@@ -117,7 +117,7 @@ final class PhoneController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+ 
     public function deletePhone(Request $request)
     {
         $session = $request->getSession();

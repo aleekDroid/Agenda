@@ -31,6 +31,10 @@ constraints_phone_number:              El número de teléfono debe tener exacta
 contact_created:                     Contacto creado
 delete_contact:                    Eliminar contacto
 delete_contact_confirmation:       ¿Está seguro de que desea eliminar este contacto?
+warning_delete:                      No podrás revertir esta acción.
+contact_deleted:                     Contacto eliminado
+contact_deleted_message:             El contacto ha sido eliminado correctamente.
+deletion_cancelled:                  Eliminación cancelada
 yes_delete:                          Sí, eliminar
 cancel:                              Cancelar
 
