@@ -34,14 +34,31 @@
                         {{ form_row(form.save) }}
                         </div>
 
-                        <script>
-                            document.querySelectorAll('.btn-info').forEach(btn => {
-                                btn.addEventListener("click", addFormToCollection)
-                            });
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
 
-							document.querySelectorAll('ul.phones li').forEach((tag) => {
+{% block javascripts %}
+
+                        <script>
+/*                             document.querySelectorAll('.btn-info').forEach(btn => {
+                                btn.addEventListener("click", addFormToCollection)
+                            }); */
+
+                            $('.btn-info').on('click', function(e) {
+                                e.preventDefault();
+                                addFormToCollection(e);
+                            });                            
+
+/* 							document.querySelectorAll('ul.phones li').forEach((tag) => {
 								addTagFormDeleteLink(tag)
-							})
+							}) */
+
+                            $('ul.phones li').each('tag', function(e) {
+                                addTagFormDeleteLink(this);
+                            });
 
                             function addFormToCollection(e) {
                                 const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
@@ -121,8 +138,5 @@
                                 });     
                             });
                         </script>
-				{{ form_end(form) }}
-			</div>
-		</div>
-	</div>
+
 {% endblock %}

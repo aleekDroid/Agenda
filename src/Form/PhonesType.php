@@ -47,14 +47,14 @@ class PhonesType extends AbstractType
                     'mb-3' => 'mb-3'
                 ]
             ])
-            ->add('save', SubmitType::class, [
+/*             ->add('save', SubmitType::class, [
                 'label' => 'add_phone',
                 'attr' => [
                     'class' => 'btn btn-success',
                     'mb-3' => 'mb-3',
                     'style' => 'margin-top: 15px;'
                 ]
-            ])
+            ]) */
         ;
     }
 

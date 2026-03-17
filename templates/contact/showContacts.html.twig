@@ -45,58 +45,9 @@
 								</td>
 								<td class="d-grid gap-5 d-md-block text-center">
 									<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
-									<a href="{{ path('contact_delete', {'id': contact.id}) }}" class="btn btn-danger delete-contact-btn" id="delete-contact-btn"><i class="fa-solid fa-trash-can"></i></a>
+									<a href="{{ path('contact_delete', {'id': contact.id}) }}" class="btn btn-danger delete-contact-btn"><i class="fa-solid fa-trash-can"></i></a>
 								</td>	
 							</tr>
-
-							<script>
-
-								$('#delete-contact-btn').on('click', function(e) {
-									e.preventDefault();
-									const url = $(this).attr('href');
-
-									Swal.fire({
-										title: '{{ "delete_contact_confirmation" |trans({}, "Agenda") }}',
-										icon: 'warning',
-										showCancelButton: true,
-										confirmButtonColor: '#d33',
-										cancelButtonColor: '#3085d6',
-										confirmButtonText: '{{ "yes_delete" |trans({}, "Agenda") }}',
-										cancelButtonText: '{{ "cancel" |trans({}, "Agenda") }}'
-									}).then((result) => {
-										if (result.isConfirmed) {
-											window.location.href = url;
-											Swal.fire({
-												title: '{{ "contact_deleted" |trans({}, "Agenda") }}',
-												text: '{{ "contact_deleted_message" |trans({}, "Agenda") }}',
-												icon: 'success',
-											});
-										}
-									});
-								});
-								
-								let dataTable;
-								let dataTableIsInitialized = false;
-
-								const dataTableOptions = {
-									"lengthMenu": [5, 10, 25, 50, 100]
-								};
-
-								const initDataTable = async () => {
-									if (dataTableIsInitialized) {
-										dataTable.destroy();
-									}
-
-									dataTable = $('#contactsTable').DataTable({});
-
-									dataTableIsInitialized = true;
-								}
-
-								$(document).ready(function() {
-									initDataTable();
-								});
-
-							</script>
 						{% endfor %}
 					</tbody>
 				</table>
@@ -104,3 +55,51 @@
 			</div>
 		</div>
 	{% endblock %}
+
+	{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.delete-contact-btn', function(e) {
+                e.preventDefault();
+                const url = $(this).attr('href');
+
+                Swal.fire({
+                    title: '{{ "delete_contact_confirmation" |trans({}, "Agenda") }}',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: '{{ "yes_delete" |trans({}, "Agenda") }}',
+                    cancelButtonText: '{{ "cancel" |trans({}, "Agenda") }}'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                        Swal.fire({
+                            title: '{{ "contact_deleted" |trans({}, "Agenda") }}',
+                            text: '{{ "contact_deleted_message" |trans({}, "Agenda") }}',
+                            icon: 'success',
+                        });
+                    }
+                });
+            });
+			let dataTable;
+			let dataTableIsInitialized = false;
+
+			const dataTableOptions = {
+				"lengthMenu": [5, 10, 25, 50, 100]
+			};
+			const initDataTable = async () => {
+				if (dataTableIsInitialized) {
+					dataTable.destroy();
+				}
+
+				dataTable = $('#contactsTable').DataTable({});
+				dataTableIsInitialized = true;
+			}
+
+		$(document).ready(function() {
+			initDataTable();
+		});
+    });
+    </script>
+{% endblock %}
